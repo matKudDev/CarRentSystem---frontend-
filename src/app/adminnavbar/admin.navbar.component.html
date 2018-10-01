@@ -1,0 +1,18 @@
+<nav *ngIf="nav.adminVisible" class="navbar navbar-inverse">
+  <div class="container-fullwidth">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/admin']">{{currentUser.branch.city}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/admin/pending']">Oczekujące <span class="glyphicon glyphicon-time"></span></a></li>
+      <li><a [routerLink]="['/admin/loaned']">Wypożyczone <span class="glyphicon glyphicon-time"></span></a></li>
+      <li><a [routerLink]="['/admin/users']">Użytkownicy <span class="glyphicon glyphicon-user"></span></a></li>
+      <li><a [routerLink]="['/admin/cars']">Samochody <span class="glyphicon glyphicon-star"></span></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <div class='logout'>
+            <li><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span><strong> Logout </strong></a></li>
+      </div>
+    </ul>
+  </div>
+</nav>

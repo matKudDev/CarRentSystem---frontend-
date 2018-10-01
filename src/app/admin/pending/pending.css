@@ -1,0 +1,20 @@
+.list{
+padding-top: 20px;
+
+padding-left: 200px;
+padding-right: 200px;
+}
+
+.body{
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;
+  width: auto;
+  height: auto;
+ background-color:  #3399ff;
+  background-size: cover;
+
+
+}

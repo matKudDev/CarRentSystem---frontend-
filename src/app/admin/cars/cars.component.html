@@ -1,0 +1,101 @@
+<div class="body">
+<div class="ui-g">
+<div class="ui-g-6">
+  <div class="addCar">
+  <h1>Dodaj auto</h1>
+  <div>
+      <form name="form" (ngSubmit)="create()" #gg="ngForm" novalidate>
+          <div class="form-group" >
+          </div>
+          <div class="form-group">
+              <label for="brand">Marka</label>
+              <input type="text" class="form-control" name="brand" [(ngModel)]="car.brand" required />
+          </div>
+
+          <div class="form-group">
+              <label for="model">Model:</label>
+              <input type="text" class="form-control" name="model" [(ngModel)]="car.model" required />
+          </div>
+
+          <div class="form-group">
+              <label for="status">Typ:</label>
+              <select class="form-control" name="type" [(ngModel)]="car.type" required>
+       <option value="Osobowe" >Osobowe</option>
+       <option value="Dostawcze">Dostawcze</option>
+              </select>
+          </div>
+
+
+          <div class="form-group">
+              <label for="prodYear">Rok produkcji:</label>
+              <input type="text" class="form-control" name="prodYear" [(ngModel)]="car.prodYear" #prodYear="ngModel" required />
+          </div>
+
+          <div class="form-group" >
+              <label for="color">Kolor:</label>
+              <input type="text" class="form-control" name="color" [(ngModel)]="car.color" #color="ngModel" required />
+          </div>
+
+          <div class="form-group">
+              <label for="prodYear">Zdjecie:</label>
+              <input type="text" class="form-control"  name="carImage" [(ngModel)]="carImage" #photo="ngModel" required />
+          </div>
+
+          <div class="form-group">
+              <label for="description">Opis:</label>
+              <input type="text" class="form-control" name="description" [(ngModel)]="car.description" #prodYear="ngModel" required />
+          </div>
+
+
+          <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">Dodaj</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+          </div>
+          <p-messages [(value)]="msgs"></p-messages>
+
+      </form>
+</div>
+  </div>
+
+</div>
+<div class="ui-g-6">
+<div class="list" >
+
+<p-dataList [value]="branchCars" [paginator]="true" [rows]="4">
+    <p-header>Lista aut </p-header>
+    <ng-template let-car pTemplate="item">
+        <div class="ui-g ui-fluid car-item">
+        <div class="ui-g-12 ui-md-3" style="text-align:center"><img src="{{car.photo}}"></div>
+            <div class="ui-g-12 ui-md-6 car-details">
+                <div class="ui-g">
+                    <div class="ui-g-2 ui-sm-6">Rok: </div>
+                    <div class="ui-g-10 ui-sm-6">{{car.prodYear}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Marka: </div>
+                    <div class="ui-g-10 ui-sm-6">{{car.brand}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Kolor: </div>
+                    <div class="ui-g-10 ui-sm-6">{{car.color}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Typ: </div>
+                    <div class="ui-g-10 ui-sm-6">{{car.type}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Opis: </div>
+                    <div class="ui-g-10 ui-sm-6"> {{car.description}}</div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-3" >
+                <button pButton type="button" (click)="delete(car)"  label="Usun"></button>
+            </div>
+
+
+        </div>
+    </ng-template>
+</p-dataList>
+
+</div>
+
+</div>
+</div>
+</div>

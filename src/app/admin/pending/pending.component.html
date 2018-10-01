@@ -1,0 +1,78 @@
+<div class="body">
+<div class="list" >
+
+  <p-dataList [value]="rents" [paginator]="true" [rows]="4" [totalRecords]="4">
+      <p-header>
+          Lista aut oczekujących na odbiór przez klienta
+      </p-header>
+      <ng-template let-rent pTemplate="item">
+          <div class="ui-g ui-fluid car-item">
+              <div class="ui-g-12 ui-md-3" style="text-align:center">
+                  <img style="width:200px" src="{{rent.car.photo}}">
+              </div>
+              <div class="ui-g-12 ui-md-6 car-details">
+                  <div class="ui-g">
+
+                    <div class="ui-g-2 ui-sm-6">Data odbioru: </div>
+                    <div class="ui-g-10 ui-sm-6">{{rent.rentDate}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Marka: </div>
+                    <div class="ui-g-10 ui-sm-6">{{rent.car.brand}}</div>
+
+                      <div class="ui-g-2 ui-sm-6">Model: </div>
+                      <div class="ui-g-10 ui-sm-6">{{rent.car.model}}</div>
+
+
+                      <div class="ui-g-2 ui-sm-6">Uzytkownik: </div>
+                      <div class="ui-g-10 ui-sm-6">{{rent.appUser.username}}</div>
+
+                      <div class="ui-g-2 ui-sm-6">Koszt: </div>
+                      <div class="ui-g-10 ui-sm-6">{{rent.cost}} PLN</div>
+
+                  </div>
+
+              </div>
+              <div class="ui-g-12 ui-md-3" >
+
+                  <button type="button" (click)="showDialog(rent)"  label="Potwierdź odbiór" class="btn btn-warning" >Potwierdź odbiór</button>
+              </div>
+
+
+          </div>
+                <hr>
+
+
+
+      </ng-template>
+
+
+  </p-dataList>
+</div>
+
+        <p-dialog  header="Wypelnij dane klienta" [(visible)]="display" modal="modal" width="700" >
+          <form #heroForm="ngForm" class="form-horizontal" >
+              <div class="form-group">
+                <label class="required-field">PESEL</label>
+                <input class="form-control" type="text" [(ngModel)]="pesel" name="pesel" required/>
+              </div>
+              <div class="form-group">
+                <label for="idCard" class="required-field">Nr. dowodu osobistego</label>
+                <input class="form-control" type="text" [(ngModel)]="idCard" name="idCard" id="idCard"  pInputText  required/>
+              </div>
+              <div class="form-group">
+                <label for="driveLicense" class="required-field">Nr prawa jazdy</label>
+                <input class="form-control"  type="text" [(ngModel)]="driveLicense" name="driveLicense" id="driveLicense" pInputText required/>
+              </div>
+              <div class="clearfix"></div>
+              <hr/>
+
+              <p-footer class="text-right col-md-12">
+                <button type="submit" pButton icon="fa-check" (click)="accept()" class="ui-button-success"
+                        label="Potwierdz"></button>
+                <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)="display=false"
+                        label="Anuluj"></button>
+              </p-footer>
+              <div class="clearfix"></div>
+            </form>
+
+  </p-dialog>

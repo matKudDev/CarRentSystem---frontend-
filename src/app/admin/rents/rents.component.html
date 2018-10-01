@@ -1,0 +1,67 @@
+<div class="body">
+<div class="list" >
+
+  <p-dataList [value]="rents" [paginator]="true" [rows]="4" [totalRecords]="4">
+      <p-header>
+          Lista wypożyczonych aut
+      </p-header>
+      <ng-template let-rent pTemplate="item">
+          <div class="ui-g ui-fluid car-item">
+              <div class="ui-g-12 ui-md-3" style="text-align:center">
+                  <img style="width:200px" src="{{rent.car.photo}}">
+              </div>
+              <div class="ui-g-12 ui-md-6 car-details">
+                  <div class="ui-g">
+
+                    <div class="ui-g-2 ui-sm-6">Data zwrotu: </div>
+                    <div class="ui-g-10 ui-sm-6">{{rent.returnDate}}</div>
+
+                    <div class="ui-g-2 ui-sm-6">Marka: </div>
+                    <div class="ui-g-10 ui-sm-6">{{rent.car.brand}}</div>
+
+                      <div class="ui-g-2 ui-sm-6">Model: </div>
+                      <div class="ui-g-10 ui-sm-6">{{rent.car.model}}</div>
+
+
+                      <div class="ui-g-2 ui-sm-6">Uzytkownik: </div>
+                      <div class="ui-g-10 ui-sm-6"><a (click)="showDialog(rent.appUser)">{{rent.appUser.username}}</a></div>
+
+
+                  </div>
+
+              </div>
+              <div class="ui-g-12 ui-md-3" >
+
+                  <button type="button" (click)="changeToReturned(rent)"  label="Potwierdź zwrot" class="btn btn-danger" >Potwierdź zwrot</button>
+              </div>
+
+          </div>
+                <hr>
+
+
+
+      </ng-template>
+
+  </p-dataList>
+</div>
+  <p-dialog  header="Dane uzytkownika" [(visible)]="display" modal="modal" width="700" >
+
+    <form #heroForm="ngForm" class="form-horizontal" >
+      <label class="required-field">  Nazwa uzytkownika:</label>
+      <div>
+        {{username}}
+      </div>
+      <label class="required-field">Numer dowodu osobistego:</label>
+      <div>
+        {{idCard}}
+      </div>
+      <label class="required-field">Numer prawa jazdy:</label>
+      <div>
+        {{licenseCard}}
+      </div>
+      <label class="required-field">PESEL:</label>
+      <div>
+        {{pesel}}
+      </div>
+    </form>
+  </p-dialog>

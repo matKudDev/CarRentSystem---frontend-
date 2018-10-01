@@ -1,0 +1,10 @@
+<div class="body">
+  <div class="welcome">
+<h1>Panel pracownika</h1>
+<h2>Miasto: {{currentUser.branch.city}}</h2>
+</div>
+<div class="map" >
+    <label for="map"> </label>
+  <p-gmap  id="map" #gmap [options]="options" [overlays]="overlays"  [style]="{'height':'320px'}" ></p-gmap>
+</div>
+</div>

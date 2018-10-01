@@ -1,0 +1,24 @@
+img {
+
+  padding-top: 25px;
+}
+
+.list{
+padding-top: 100px;
+
+  padding-left: 500px;
+}
+
+.body{
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;
+  width: auto;
+  height: auto;
+ background-color:  #3399ff;
+  background-size: cover;
+
+  z-index: 0;
+}

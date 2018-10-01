@@ -1,0 +1,166 @@
+<div class="body" >
+<div class="ui-g">
+<div class="ui-g-4"></div>
+<div class="ui-g-4">
+  <div class="card" *ngIf="searchVisible">
+    <div class="info" >
+    <p-card [style]="{width: '560px'}">
+    <strong>RENTcarSystem</strong> wypożyczalnia samochodów<br>
+    Wybierz najlepszą oferte!
+    </p-card>
+    </div>
+    <p-card  [style]="{width: '560px'}" >
+     <form  (ngSubmit)="f.form.valid && search()" #f="ngForm" novalidate>
+<div class="search-inputs">
+      <div class=pickup>
+<label>Odbiór : </label>
+<p-dropdown [options]="cities" [style]="{width: '90px'}" [(ngModel)]="selectedCity" name="selectedCity" placeholder="Miasto" optionLabel="city" required></p-dropdown>
+<p-calendar [(ngModel)]="pickupDate" name="pickupDate" dateFormat="dd/mm/yy" placeholder="Data dd/mm/yyyy" required></p-calendar>
+</div>
+<div class="return">
+  <label>Zwrot : </label>
+  <p-dropdown [options]="cities" [style]="{width: '90px'}" [(ngModel)]="selectedReturn" name="returnCity" placeholder="Miasto" optionLabel="city" required></p-dropdown>
+  <p-calendar [(ngModel)]="returnDate" name="returnDate" placeholder="Data dd/mm/yyyy"  dateFormat="dd/mm/yy" required></p-calendar>
+</div>
+<div class="car-type">
+<label>Typ : </label>
+  <p-dropdown [options]="types" [style]="{width: '262px'}" [(ngModel)]="selectedType" name="types" placeholder="Wybierz typ" required></p-dropdown>
+</div>
+</div>
+<div class="search-button">
+<button pButton  type="button" (click)="search()" icon="fa-search" label="Search"></button>
+</div>
+</form>
+</p-card>
+
+</div>
+</div>
+
+<div class="ui-g-4"></div>
+
+
+
+</div>
+<div class="ui-g" *ngIf="carsVisible">
+  <div class="ui-g-8">
+<div class="list" >
+
+  <p-dataList [value]="cars" [paginator]="true" [rows]="4" [totalRecords]="4">
+      <p-header>
+          Lista dostępnych samochodów
+      </p-header>
+      <ng-template let-car pTemplate="item">
+          <div class="ui-g ui-fluid car-item">
+              <div class="ui-g-12 ui-md-3" style="text-align:center">
+                  <img src="{{car.photo}}">
+              </div>
+              <div class="ui-g-12 ui-md-6 car-details">
+                  <div class="ui-g">
+
+
+                    <div class="ui-g-2 ui-sm-6">Brand: </div>
+                    <div class="ui-g-10 ui-sm-6">{{car.brand}}</div>
+
+                      <div class="ui-g-2 ui-sm-6">Model: </div>
+                      <div class="ui-g-10 ui-sm-6">{{car.model}}</div>
+
+
+                      <div class="ui-g-2 ui-sm-6">Year: </div>
+                      <div class="ui-g-10 ui-sm-6">{{car.prodYear}}</div>
+
+                      <div class="ui-g-2 ui-sm-6">Description: </div>
+                      <div class="ui-g-10 ui-sm-6">{{car.description}}</div>
+
+                  </div>
+
+              </div>
+              <div class="ui-g-12 ui-md-3" >
+
+                  <button pButton type="button" (click)="rentCar(car)"  label="Rezerwuj Teraz" class="ui-button-success"></button>
+              </div>
+
+          </div>
+                <hr>
+      </ng-template>
+
+  </p-dataList>
+
+</div>
+</div>
+</div>
+
+<div *ngIf="summaryVisible" class="summary">
+
+  <p-card  [style]="{width: '1200px',height: '700px'}">
+
+        <div class="ui-g-6">
+          <div class="carDetails">
+    <p-card [style]="{width: '500px',height: '600px'}">
+    <p-header>
+           <img src="{{carSelected.photo}}">
+<div class="details">
+           <div class="ui-g">
+
+
+             <div class="ui-g-2 ui-sm-6">Marka: </div>
+             <div class="ui-g-10 ui-sm-6">{{carSelected.brand}}</div>
+                <hr>
+               <div class="ui-g-2 ui-sm-6">Model: </div>
+               <div class="ui-g-10 ui-sm-6">{{carSelected.model}}</div>
+
+               <div class="ui-g-2 ui-sm-6">Typ: </div>
+               <div class="ui-g-10 ui-sm-6">{{carSelected.type}}</div>
+
+               <div class="ui-g-2 ui-sm-6">Kolor: </div>
+               <div class="ui-g-10 ui-sm-6">{{carSelected.color}}</div>
+
+               <div class="ui-g-2 ui-sm-6">Rok: </div>
+               <div class="ui-g-10 ui-sm-6">{{carSelected.prodYear}}</div>
+
+               <div class="ui-g-2 ui-sm-6">Opis: </div>
+               <div class="ui-g-10 ui-sm-6">{{carSelected.description}}</div>
+
+           </div>
+         </div>
+       </p-header>
+
+</p-card>
+</div>
+</div>
+  <div class="ui-g-6">
+    <div class="carSummary">
+
+<div >
+  <h2><label>Odbior: </label> {{pickupDate | date:'dd-MM-yyyy'}} {{selectedCity.city}} </h2>
+  <h2><label>Zwrot: </label> {{returnDate | date:'dd-MM-yyyy'}} {{selectedReturn.city}} </h2>
+</div>
+<h1>Cena wypożyczenia : {{price}} PLN</h1>
+<button pButton type="button" label="Rezerwuj" (click)="book()" icon="fa-check"></button>
+      <button pButton  type="button" label="Anuluj" (click)="previous()" class="filter-btn"></button>
+    </div>
+    </div>
+  </p-card>
+</div>
+
+<div *ngIf="successVisible" class="successTemplate">
+<div class="container">
+  <p-card [style]="{width: '1200px',height: '700px'}">
+	<div class="row text-center">
+        <div class="col-sm-6 col-sm-offset-3">
+        <br><br> <h2 style="color:#0fad00">Sukces</h2>
+        <svg viewBox="0 0 76 76" class="success-message__icon icon-checkmark">
+            <circle cx="38" cy="38" r="36"/>
+            <path fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M17.7,40.9l10.9,10.9l28.7-28.7"/>
+        </svg>
+        <h3>Drogi kliencie</h3>
+        <p style="font-size:20px;color:#5C5C5C;">Dziękujemy za skorzystanie z naszych usług. Zapraszamy po odbiór samochodu {{pickupDate | date:'dd-MM-yyyy'}}
+w naszym oddziale {{selectedCity.city}}
+        </p>
+        <a href="" class="btn btn-success"> Powrót do strony głównej</a>
+    <br><br>
+        </div>
+
+	</div>
+  </p-card>
+</div>
+</div>
